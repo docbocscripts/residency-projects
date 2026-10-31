@@ -26,14 +26,18 @@ python -m http.server 8000
 
 Then visit `http://localhost:8000`.
 
-## Publish for free with GitHub Pages
+## Publish this repository using GitHub Pages
 
-1. On GitHub, [create a new repository](https://github.com/new), e.g. `residentflow-chief-resident-prototypes`. Make it **Public**. You can initialize with a README or create it empty.
-2. Upload the **contents** of this project folder to the repository root. Ensure `index.html`, `styles.css`, and `app.js` are at the **root**, not nested inside a subfolder. In GitHub's interface use **Add file → Upload files** and commit; or push from Git on your computer.
-3. Open repository **Settings → Pages**. Under **Build and deployment**, choose **Deploy from a branch**, then select **main** and **/(root)**, and save.
-4. GitHub Pages will publish the site at `https://YOUR-USERNAME.github.io/residentflow-chief-resident-prototypes/`. Use the URL GitHub actually shows under Pages to verify publication.
+The project is already committed to the **public** repository `deskpig/residency-projects` on branch `main`. Its root `index.html` is fully self-contained: markup, styles, and JavaScript are embedded, so no build tools, separate asset uploads, or external dependencies are required.
 
-GitHub's official instructions: [Creating a GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site), [Configuring a publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+To activate the public website:
+
+1. Open [Settings → Pages](https://github.com/deskpig/residency-projects/settings/pages) as the repository owner.
+2. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
+3. Choose **main** and **/(root)**, then select **Save**.
+4. After GitHub completes deployment, verify the website at **https://deskpig.github.io/residency-projects/**.
+
+Publication must be enabled by a repository administrator. Committing files alone does not guarantee a Pages site is live. [GitHub documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
 ## Call schedule: data contract and matching assumptions
 
@@ -94,11 +98,13 @@ For an institutional pilot, next steps would include SSO (institutional login), 
 
 ## Files
 
-- `index.html` — responsive app pages and semantic content
-- `styles.css` — responsive styling and print stylesheet
-- `app.js` — data import, matching, ratings, export, acknowledgment logic
+- `index.html` — complete, self-contained responsive website and all three interactive prototypes, including styling and script
 - `sample_schedule.csv` — fictional roster to test import
-- `PROJECT_PITCH.md` — chief resident application pitch / pilot outline
-- `.nojekyll` — prevents Jekyll processing on branch-based GitHub Pages
+- `PROJECT_PITCH.md` — chief resident application pitch and pilot outline
+- `README.md` — deployment, sample-data contract, learning resource provenance, and privacy considerations
+- `.nojekyll` — disables Jekyll processing on branch-based GitHub Pages
+- `LICENSE` — MIT license
+
+**Design:** Original monochrome editorial design inspired by the general visual language of art-gallery websites, including Artsy; not affiliated with Artsy and uses no Artsy assets or brand marks.
 
 **License:** MIT. You may adapt, review and propose improvements, but source links and safety notes should be preserved where relevant.
