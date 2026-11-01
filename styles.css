@@ -62,3 +62,25 @@ html{scroll-behavior:auto;background:#fff}body{background:#fff;color:#242424;fon
 
 /* Keep desktop documentation navigation aligned to the left edge. */
 @media(min-width:931px){.sidebar .nav-list{align-items:stretch}.sidebar .nav-link{width:100%}}
+
+/* Simplified demo navigation */
+@media (min-width:931px){
+  .sidebar .nav-list{gap:2px}
+  .sidebar .nav-link{padding:7px 19px;gap:11px;min-height:36px}
+}
+/* Keep the printable agreement visible: #print-sheet lives directly in <body>,
+   outside the .app-shell/.view hidden during printing. */
+@media print{
+  @page{size:A4;margin:14mm}
+  html,body{background:white!important;color:#111!important;margin:0!important;padding:0!important}
+  .app-shell,.skip,.toast{display:none!important}
+  body > #print-sheet{display:block!important;position:static!important;visibility:visible!important;margin:0!important;padding:0!important;border:0!important;max-width:none!important;box-shadow:none!important;background:#fff!important;color:#111!important;font-family:Arial,Helvetica,sans-serif!important;font-size:10pt!important;line-height:1.38!important}
+  #print-sheet h1{font:700 20pt Arial,Helvetica,sans-serif!important;color:#111!important;margin:0 0 2mm!important}
+  #print-sheet h2{font:700 11.5pt Arial,Helvetica,sans-serif!important;color:#111!important;margin:7mm 0 3mm!important;padding:0 0 2mm!important;border-bottom:1px solid #aaa!important;break-after:avoid}
+  #print-sheet .print-pair{width:48%;display:inline-block;vertical-align:top;break-inside:avoid;padding:1mm 3mm 1mm 0;box-sizing:border-box}
+  #print-sheet .print-label{font:700 8pt Arial,Helvetica,sans-serif!important;color:#444!important;text-transform:none!important;letter-spacing:0!important;break-after:avoid}
+  #print-sheet p{color:#111!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;margin:1mm 0 3mm!important;font:10pt/1.4 Arial,Helvetica,sans-serif!important;orphans:2;widows:2}
+  #print-sheet .print-meta{font-size:8pt!important;color:#555!important}
+  #print-sheet .print-sign{display:flex;gap:8mm;margin-top:6mm;break-inside:avoid}
+  #print-sheet .print-sign>div{flex:1;padding:3mm 0 0;border-top:1px solid #888;break-inside:avoid}
+}
