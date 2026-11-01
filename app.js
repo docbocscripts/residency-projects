@@ -2,28 +2,28 @@
 'use strict';
 
 const sampleSchedule = [
-  ['2026-11-05','Dr. Maya Chen','PGY3','Overnight','General Hospital'],
-  ['2026-11-21','Dr. Maya Chen','PGY3','Weekend','General Hospital'],
-  ['2026-11-10','Dr. Aisha Patel','PGY3','Overnight','General Hospital'],
-  ['2026-11-23','Dr. Aisha Patel','PGY3','Overnight','General Hospital'],
-  ['2026-11-12','Dr. Daniel Lee','PGY3','Overnight','General Hospital'],
-  ['2026-11-25','Dr. Daniel Lee','PGY3','Overnight','General Hospital'],
-  ['2026-11-08','Dr. Omar Haddad','PGY3','Overnight','General Hospital'],
-  ['2026-11-26','Dr. Omar Haddad','PGY3','Overnight','General Hospital'],
-  ['2026-11-15','Dr. Priya Shah','PGY3','Weekend','General Hospital'],
-  ['2026-11-28','Dr. Priya Shah','PGY3','Weekend','General Hospital'],
-  ['2026-11-17','Dr. Sophie Tremblay','PGY3','Overnight','General Hospital'],
-  ['2026-11-29','Dr. Sophie Tremblay','PGY3','Overnight','General Hospital'],
-  ['2026-11-19','Dr. Lucas Wong','PGY3','Overnight','General Hospital'],
-  ['2026-11-30','Dr. Lucas Wong','PGY3','Overnight','General Hospital'],
-  ['2026-11-06','Dr. Emma Brooks','PGY4','Overnight','General Hospital'],
-  ['2026-11-13','Dr. Emma Brooks','PGY4','Overnight','General Hospital'],
-  ['2026-11-11','Dr. Alex Nguyen','PGY4','Overnight','Central Campus'],
-  ['2026-11-20','Dr. Alex Nguyen','PGY4','Weekend','Central Campus'],
-  ['2026-11-04','Dr. Noah Martin','PGY3','Overnight','Central Campus'],
-  ['2026-11-24','Dr. Noah Martin','PGY3','Overnight','Central Campus'],
-  ['2026-11-09','Dr. Grace Kim','PGY3','Overnight','Central Campus'],
-  ['2026-11-22','Dr. Grace Kim','PGY3','Weekend','Central Campus']
+  ['2026-11-05','Dr. Jane Doe','PGY3','Overnight','General Hospital'],
+  ['2026-11-21','Dr. Jane Doe','PGY3','Weekend','General Hospital'],
+  ['2026-11-10','Dr. Bob Roberts','PGY3','Overnight','General Hospital'],
+  ['2026-11-23','Dr. Bob Roberts','PGY3','Overnight','General Hospital'],
+  ['2026-11-12','Dr. Alex Sample','PGY3','Overnight','General Hospital'],
+  ['2026-11-25','Dr. Alex Sample','PGY3','Overnight','General Hospital'],
+  ['2026-11-08','Dr. Jamie Example','PGY3','Overnight','General Hospital'],
+  ['2026-11-26','Dr. Jamie Example','PGY3','Overnight','General Hospital'],
+  ['2026-11-15','Dr. Taylor Demo','PGY3','Weekend','General Hospital'],
+  ['2026-11-28','Dr. Taylor Demo','PGY3','Weekend','General Hospital'],
+  ['2026-11-17','Dr. Chris Sample','PGY3','Overnight','General Hospital'],
+  ['2026-11-29','Dr. Chris Sample','PGY3','Overnight','General Hospital'],
+  ['2026-11-19','Dr. Jordan Example','PGY3','Overnight','General Hospital'],
+  ['2026-11-30','Dr. Jordan Example','PGY3','Overnight','General Hospital'],
+  ['2026-11-06','Dr. Casey Demo','PGY4','Overnight','General Hospital'],
+  ['2026-11-13','Dr. Casey Demo','PGY4','Overnight','General Hospital'],
+  ['2026-11-11','Dr. Morgan Test','PGY4','Overnight','Central Campus'],
+  ['2026-11-20','Dr. Morgan Test','PGY4','Weekend','Central Campus'],
+  ['2026-11-04','Dr. Riley Sample','PGY3','Overnight','Central Campus'],
+  ['2026-11-24','Dr. Riley Sample','PGY3','Overnight','Central Campus'],
+  ['2026-11-09','Dr. Avery Doe','PGY3','Overnight','Central Campus'],
+  ['2026-11-22','Dr. Avery Doe','PGY3','Weekend','Central Campus']
 ].map(([date,resident,level,type,site],idx)=>({id:`demo-${idx+1}`,date,resident,level,type,site}));
 
 const resources = {
@@ -71,7 +71,7 @@ function download(filename,content,mime){const blob=new Blob([content],{type:mim
 function csvEscape(value){return '"'+String(value??'').replaceAll('"','""')+'"';}
 function toCSV(rows){return rows.map(row=>row.map(csvEscape).join(',')).join('\r\n')+'\r\n';}
 
-function refreshResidents(previous){const residents=[...new Set(schedule.map(x=>x.resident))].sort((a,b)=>a.localeCompare(b));const select=$('resident-select');select.innerHTML=residents.map(r=>`<option value="${safe(r)}">${safe(r)}</option>`).join('');select.value=residents.includes(previous)?previous:residents.includes('Dr. Maya Chen')?'Dr. Maya Chen':residents[0]||'';refreshOffered();}
+function refreshResidents(previous){const residents=[...new Set(schedule.map(x=>x.resident))].sort((a,b)=>a.localeCompare(b));const select=$('resident-select');select.innerHTML=residents.map(r=>`<option value="${safe(r)}">${safe(r)}</option>`).join('');select.value=residents.includes(previous)?previous:residents.includes('Dr. Jane Doe')?'Dr. Jane Doe':residents[0]||'';refreshOffered();}
 function refreshOffered(){const prior=$('offered-select').value;const shifts=schedule.filter(s=>s.resident===$('resident-select').value).sort((a,b)=>a.date.localeCompare(b.date));$('offered-select').innerHTML=shifts.map(s=>`<option value="${safe(s.id)}">${dateLabel(s.date)} · ${safe(s.type)} · ${safe(s.site)}</option>`).join('');if(shifts.some(s=>s.id===prior))$('offered-select').value=prior;findMatches();}
 function canTake(resident,newShift,removedShift,avoidAdjacent){return !schedule.some(s=>{
  if(s.resident!==resident||s.id===removedShift.id)return false;
@@ -86,11 +86,22 @@ function findMatches(){const mine=$('resident-select').value,offered=schedule.fi
   if(windowChoice==='before'&&s.date>=offered.date)return false;
   if(windowChoice==='14'&&dayGap(s.date,offered.date)>14)return false;
   return canTake(mine,s,offered,restGap)&&canTake(s.resident,offered,s,restGap);
- }).map(s=>({...s,score:Math.max(72,99-dayGap(s.date,offered.date)),reason:`${s.level} matched · ${s.type} matched · ${sameSite?'same site · ':''}${restGap?'rest-gap checked':'no date conflict'}`})).sort((a,b)=>b.score-a.score||a.date.localeCompare(b.date));
+ }).map(s=>({...s,reason:`${s.level} matched · ${s.type} matched · ${sameSite?'same site · ':''}${restGap?'rest-gap checked':'no date conflict'}`})).sort((a,b)=>a.date.localeCompare(b.date));
  const results=$('matches-list');$('stat-matches').textContent=currentMatches.length;$('match-count').textContent=`${currentMatches.length} ${currentMatches.length===1?'match':'matches'}`;
  if(!offered){results.innerHTML='<div class="empty-state"><span class="empty-symbol">↔</span><h3>No call selected</h3><p>Select a resident with an assigned shift to start.</p></div>';return;}
- if(!currentMatches.length){results.innerHTML='<div class="empty-state"><span class="empty-symbol">⌕</span><h3>No matches under these rules</h3><p>Try widening the preferred dates, unchecking “same hospital,” or uploading a larger schedule.</p></div>';return;}
- results.innerHTML=currentMatches.map(s=>{const id=`${offered.id}|${s.id}`,proposed=proposals.has(id);return `<article class="match-card"><div class="match-info"><div class="match-name">${safe(s.resident)} <span class="match-score">${s.score}% fit*</span></div><div class="match-dates">Your ${dateLabel(offered.date)} <span aria-hidden="true">⇄</span> ${dateLabel(s.date)}</div><div class="match-reason">${safe(s.reason)}</div></div><button class="match-action ${proposed?'proposed':''}" data-proposal="${safe(id)}">${proposed?'✓ Flagged':'Flag for review'}</button></article>`;}).join('')+'<p class="small-help">*Fit is an illustrative sorting heuristic, not a probability or institutional approval score.</p>';
+ if(!currentMatches.length){results.innerHTML='<div class="empty-state"><span class="empty-symbol">⌕</span><h3>No matches under these rules</h3><p>Try widening the preferred dates, unchecking “same hospital,” or adjusting the other match criteria.</p></div>';return;}
+ results.innerHTML=currentMatches.map(s=>`<article class="match-card"><div class="match-info"><div class="match-name">${safe(s.resident)}</div><div class="match-dates">Your ${dateLabel(offered.date)} <span aria-hidden="true">⇄</span> ${dateLabel(s.date)}</div><div class="match-reason">${safe(s.reason)}</div></div><button class="match-action" data-email-trade="${safe(s.id)}">Email resident</button></article>`).join('');
+}
+
+function emailResident(e){
+ const button=e.target.closest('[data-email-trade]');if(!button)return;
+ const selected=schedule.find(row=>row.id===$('offered-select').value);
+ const proposed=currentMatches.find(row=>row.id===button.dataset.emailTrade);
+ if(!selected||!proposed)return;
+ const subject=`Call trade request — ${dateLabel(selected.date)} / ${dateLabel(proposed.date)}`;
+ const message=`Hi ${proposed.resident},\n\nWould you be interested in discussing a call trade?\n\nMy shift: ${dateLabel(selected.date)} (${selected.type}, ${selected.site})\nYour shift: ${dateLabel(proposed.date)} (${proposed.type}, ${proposed.site})\n\nPlease let me know if this could work. Any trade would require the usual program approval.\n\nThanks,\n${selected.resident}`;
+ window.location.href=`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+ toast('Email draft opened. Add the recipient address before sending.');
 }
 function refreshSchedule(){ $('stat-shifts').textContent=schedule.length;$('stat-residents').textContent=new Set(schedule.map(s=>s.resident)).size;const sorted=[...schedule].sort((a,b)=>a.date.localeCompare(b.date));$('schedule-body').innerHTML=sorted.map(s=>`<tr><td>${dateLabel(s.date)}</td><td>${safe(s.resident)}</td><td><span class="table-tag">${safe(s.level)}</span></td><td>${safe(s.type)}</td><td>${safe(s.site)}</td></tr>`).join('');$('schedule-caption').textContent=`Showing ${schedule.length} ${usingSample?'sample':'imported'} call rows`;refreshResidents($('resident-select').value);}
 function parseCSV(input){const text=input.replace(/^\uFEFF/,'');let rows=[],row=[],cell='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i];if(c==='"'){if(quoted&&text[i+1]==='"'){cell+='"';i++;}else quoted=!quoted;}else if(c===','&&!quoted){row.push(cell);cell='';}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&text[i+1]==='\n')i++;row.push(cell);if(row.some(v=>v.trim()))rows.push(row);row=[];cell='';}else cell+=c;}if(quoted)throw new Error('CSV contains an unclosed quoted field.');row.push(cell);if(row.some(v=>v.trim()))rows.push(row);return rows;}
@@ -125,17 +136,15 @@ function renderSignatures(){for(const role of ['resident','supervisor']){const s
 function acknowledge(role){const field=role==='resident'?'ag-resident':'ag-supervisor',name=$(field).value.trim();if(!name){$(field).focus();toast(`Enter the ${role==='resident'?'resident':'supervisor'} name before acknowledging.`);return;}
  const other=role==='resident'?'supervisor':'resident';if(!window.confirm(`Prototype acknowledgment only. Confirm that ${name} has reviewed the current shared agreement as ${role}? This is not an identity-verified signature.`))return;signatures[role]={name,timestamp:new Date().toISOString()};renderSignatures();toast(`${role==='resident'?'Resident':'Supervisor'} acknowledgment recorded in this browser tab.`);}
 function applyLearningToAgreement(){const goals=prioritized().slice(0,3);if(!goals.length){toast('First rate topics or request teaching in Learning Map.');return;}const lines=goals.map((o,i)=>`${i+1}. ${o.title}${o.rating?' (self-rated '+o.rating+'/5)':''}`).join('\n');$('ag-goals').value=lines;$('ag-rotation').value=({'inpatient':'Inpatient psychiatry','outpatient':'Outpatient psychiatry','emergency':'Emergency / consultation-liaison','child':'Child & adolescent psychiatry','geriatric':'Geriatric psychiatry','addictions':'Addictions psychiatry'})[$('rotation-filter').value]||'Inpatient psychiatry';$('goals-hint').textContent='Imported from this tab’s Learning Map check-in. Review together before acknowledgment.';invalidateSignatures();location.hash='agreement';toast('Top learning priorities added to rotation agreement.');}
-function makePrintSheet(){const d=agreementData(),entries=Object.entries(d);let html='<h1>Rotation Learning Agreement</h1><p class="print-meta">ResidentFlow · Prototype shared expectations record · Generated '+safe(new Date().toLocaleString('en-CA'))+'</p>';
+function makePrintSheet(){const d=agreementData(),entries=Object.entries(d);let html='<h1>Rotation Learning Agreement</h1><p class="print-meta">Sample rotation agreement · Pre-rotation expectations · Generated '+safe(new Date().toLocaleString('en-CA'))+'</p>';
  html+='<h2>Context</h2>';for(const [k,v] of entries.slice(0,6))html+=`<div class="print-pair"><div class="print-label">${safe(k)}</div><p>${safe(v||'—')}</p></div>`;
  html+='<h2>Learning plan</h2>';for(const [k,v] of entries.slice(6,9))html+=`<div class="print-label">${safe(k)}</div><p>${safe(v||'—')}</p>`;
  html+='<h2>Shared working expectations</h2>';for(const [k,v] of entries.slice(9))html+=`<div class="print-label">${safe(k)}</div><p>${safe(v||'—')}</p>`;
  html+='<h2>Prototype acknowledgments</h2><p class="print-meta">The entries below are self-reported acknowledgments, not verified electronic signatures.</p><div class="print-sign">';for(const role of ['resident','supervisor']){const s=signatures[role];html+=`<div><b>${role==='resident'?'Resident':'Staff supervisor'}</b><p>${s?safe(s.name)+' · '+safe(new Date(s.timestamp).toLocaleString('en-CA')):'Not acknowledged'}</p></div>`;}html+='</div>';$('print-sheet').innerHTML=html;}
-function exportAgreement(){download('residentflow-rotation-agreement.json',JSON.stringify({prototype:true,identityVerified:false,generatedAt:new Date().toISOString(),agreement:agreementData(),acknowledgments:signatures},null,2),'application/json;charset=utf-8');toast('Prototype agreement record exported.');}
 
 function init(){document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{location.hash=b.dataset.go;}));window.addEventListener('hashchange',refreshRoute);refreshRoute();$('menu-toggle').addEventListener('click',()=>$('sidebar').classList.toggle('open'));
- $('resident-select').addEventListener('change',refreshOffered);for(const id of ['offered-select','window-select','same-site','rest-gap'])$(id).addEventListener('change',findMatches);$('find-matches').addEventListener('click',()=>{findMatches();toast(`${currentMatches.length} compatible trade option${currentMatches.length===1?'':'s'} found.`);});$('matches-list').addEventListener('click',e=>{const b=e.target.closest('[data-proposal]');if(!b)return;const id=b.dataset.proposal;if(proposals.has(id))proposals.delete(id);else proposals.add(id);findMatches();toast(proposals.has(id)?'Flagged for discussion. No messages or schedule changes were sent.':'Review flag removed.');});
- $('schedule-upload').addEventListener('change',e=>importSchedule(e.target.files[0]));$('reset-schedule').addEventListener('click',()=>{usingSample=true;schedule=sampleSchedule.map(x=>({...x}));proposals.clear();$('import-note').classList.remove('error');$('import-note').innerHTML='Showing sample schedule for demonstration. Expected columns: <code>date</code>, <code>resident</code>, <code>level</code>, <code>type</code>, <code>site</code>.';refreshSchedule();toast('Sample call schedule restored.');});$('download-sample').addEventListener('click',()=>download('residentflow-sample-schedule.csv',toCSV([['date','resident','level','type','site'],...sampleSchedule.map(x=>[x.date,x.resident,x.level,x.type,x.site])]),'text/csv;charset=utf-8'));
+ $('resident-select').addEventListener('change',refreshOffered);for(const id of ['offered-select','window-select','same-site','rest-gap'])$(id).addEventListener('change',findMatches);$('find-matches').addEventListener('click',()=>{findMatches();toast(`${currentMatches.length} compatible trade option${currentMatches.length===1?'':'s'} found.`);});$('matches-list').addEventListener('click',emailResident);
  $('objective-list').addEventListener('click',e=>{const b=e.target.closest('[data-rate]');if(!b)return;const o=objectives.find(x=>x.id===b.dataset.rate);o.rating=o.rating===Number(b.dataset.value)?0:Number(b.dataset.value);renderObjectives();});$('objective-list').addEventListener('change',e=>{if(!e.target.matches('[data-request]'))return;const o=objectives.find(x=>x.id===e.target.dataset.request);o.request=e.target.checked;refreshLearningSummary();});for(const id of ['learner-level','rotation-filter'])$(id).addEventListener('change',renderObjectives);$('objective-search').addEventListener('input',renderObjectives);$('export-learning').addEventListener('click',exportLearning);$('apply-to-agreement').addEventListener('click',applyLearningToAgreement);
- agreementFields.forEach(id=>{$(id).addEventListener('input',invalidateSignatures);$(id).addEventListener('change',invalidateSignatures);});$('resident-sign').addEventListener('click',()=>acknowledge('resident'));$('supervisor-sign').addEventListener('click',()=>acknowledge('supervisor'));$('reset-agreement').addEventListener('click',()=>{signatures={resident:null,supervisor:null};renderSignatures();toast('Acknowledgments reset. Agreement content retained.');});$('print-agreement').addEventListener('click',()=>{makePrintSheet();window.print();});$('export-agreement').addEventListener('click',exportAgreement);
+ agreementFields.forEach(id=>{$(id).addEventListener('input',invalidateSignatures);$(id).addEventListener('change',invalidateSignatures);});$('resident-sign').addEventListener('click',()=>acknowledge('resident'));$('supervisor-sign').addEventListener('click',()=>acknowledge('supervisor'));$('reset-agreement').addEventListener('click',()=>{signatures={resident:null,supervisor:null};renderSignatures();toast('Acknowledgments reset. Agreement content retained.');});$('print-agreement').addEventListener('click',()=>{makePrintSheet();window.print();});
  refreshSchedule();renderObjectives();renderSignatures();}
 window.addEventListener('DOMContentLoaded',init);
