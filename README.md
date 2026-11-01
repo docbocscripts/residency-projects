@@ -11,7 +11,7 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-No package installation or build step. The published `index.html` includes the CSS and JavaScript inline so the demo can be run or shared as a single file.
+No package installation or build step. `index.html` loads the local `styles.css` and `app.js` files, keeping markup, styling and behavior separate.
 
 ## Demos
 
@@ -68,7 +68,9 @@ These links are suggestions to check against current training standards and loca
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | All three demos, their browser logic, and styling in one standalone file |
+| `index.html` | Semantic markup for the index and three demo screens |
+| `styles.css` | Layout, responsive styles and print output |
+| `app.js` | Call matching, schedule import, rating state, form acknowledgments and exports |
 | `sample_schedule.csv` | Fictional schedule for testing import |
 | `.nojekyll` | Use branch-based GitHub Pages without Jekyll processing |
 | `LICENSE` | MIT license |
