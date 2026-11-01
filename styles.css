@@ -84,3 +84,10 @@ html{scroll-behavior:auto;background:#fff}body{background:#fff;color:#242424;fon
   #print-sheet .print-sign{display:flex;gap:8mm;margin-top:6mm;break-inside:avoid}
   #print-sheet .print-sign>div{flex:1;padding:3mm 0 0;border-top:1px solid #888;break-inside:avoid}
 }
+
+/* Extra breathing room below the three demo pages; leave the index unchanged. */
+@media screen {
+  #view-calls,
+  #view-learning,
+  #view-agreement { padding-bottom: 110px; }
+}
