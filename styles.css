@@ -100,3 +100,6 @@ html{scroll-behavior:auto;background:#fff}body{background:#fff;color:#242424;fon
 .acknowledgment-note p{margin:0;font-size:12px;line-height:1.65;color:inherit}
 .acknowledgment-note strong{color:#34383b;font-weight:550}
 @media(max-width:690px){.brand-name{font-size:12px}}
+
+/* No divider under the now-empty prototype header. */
+@media screen { .topbar { border-bottom: none; } }
