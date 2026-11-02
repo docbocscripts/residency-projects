@@ -91,3 +91,12 @@ html{scroll-behavior:auto;background:#fff}body{background:#fff;color:#242424;fon
   #view-learning,
   #view-agreement { padding-bottom: 110px; }
 }
+
+/* Compact project path and low-emphasis acknowledgment explanation. */
+.brand-name{font-size:12px;letter-spacing:-.035em;line-height:1.5;white-space:normal;overflow-wrap:anywhere}
+.brand-project{font-weight:500;color:#62666a}
+.brand-slash{margin:0 3px;color:#a0a0a0}
+.acknowledgment-note{margin-top:15px;padding:13px 15px;background:#fafafa;border-left:2px solid #dedede;color:#63666a}
+.acknowledgment-note p{margin:0;font-size:12px;line-height:1.65;color:inherit}
+.acknowledgment-note strong{color:#34383b;font-weight:550}
+@media(max-width:690px){.brand-name{font-size:12px}}
