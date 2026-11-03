@@ -1,23 +1,23 @@
 date,resident,level,type,site
-2026-11-05,Dr. Jane Doe,PGY3,Overnight,General Hospital
-2026-11-21,Dr. Jane Doe,PGY3,Weekend,General Hospital
-2026-11-10,Dr. Bob Roberts,PGY3,Overnight,General Hospital
-2026-11-23,Dr. Bob Roberts,PGY3,Overnight,General Hospital
-2026-11-12,Dr. Alex Sample,PGY3,Overnight,General Hospital
-2026-11-25,Dr. Alex Sample,PGY3,Overnight,General Hospital
-2026-11-08,Dr. Jamie Example,PGY3,Overnight,General Hospital
-2026-11-26,Dr. Jamie Example,PGY3,Overnight,General Hospital
-2026-11-15,Dr. Taylor Demo,PGY3,Weekend,General Hospital
-2026-11-28,Dr. Taylor Demo,PGY3,Weekend,General Hospital
-2026-11-17,Dr. Chris Sample,PGY3,Overnight,General Hospital
-2026-11-29,Dr. Chris Sample,PGY3,Overnight,General Hospital
-2026-11-19,Dr. Jordan Example,PGY3,Overnight,General Hospital
-2026-11-30,Dr. Jordan Example,PGY3,Overnight,General Hospital
-2026-11-06,Dr. Casey Demo,PGY4,Overnight,General Hospital
-2026-11-13,Dr. Casey Demo,PGY4,Overnight,General Hospital
-2026-11-11,Dr. Morgan Test,PGY4,Overnight,Central Campus
-2026-11-20,Dr. Morgan Test,PGY4,Weekend,Central Campus
-2026-11-04,Dr. Riley Sample,PGY3,Overnight,Central Campus
-2026-11-24,Dr. Riley Sample,PGY3,Overnight,Central Campus
-2026-11-09,Dr. Avery Doe,PGY3,Overnight,Central Campus
-2026-11-22,Dr. Avery Doe,PGY3,Weekend,Central Campus
+2026-11-05,Dr. Jane Doe,PGY3,Overnight,UHN
+2026-11-21,Dr. Jane Doe,PGY3,Weekend,UHN
+2026-11-10,Dr. Bob Roberts,PGY3,Overnight,UHN
+2026-11-23,Dr. Bob Roberts,PGY3,Overnight,UHN
+2026-11-12,Dr. Alex Sample,PGY3,Overnight,Sunnybrook
+2026-11-25,Dr. Alex Sample,PGY3,Overnight,Sunnybrook
+2026-11-08,Dr. Jamie Example,PGY3,Overnight,Sunnybrook
+2026-11-26,Dr. Jamie Example,PGY3,Overnight,Sunnybrook
+2026-11-15,Dr. Taylor Demo,PGY3,Weekend,St. Mike's
+2026-11-28,Dr. Taylor Demo,PGY3,Weekend,St. Mike's
+2026-11-17,Dr. Chris Sample,PGY3,Overnight,St. Mike's
+2026-11-29,Dr. Chris Sample,PGY3,Overnight,St. Mike's
+2026-11-19,Dr. Jordan Example,PGY3,Overnight,Mount Sinai
+2026-11-30,Dr. Jordan Example,PGY3,Overnight,Mount Sinai
+2026-11-06,Dr. Casey Demo,PGY4,Overnight,CAMH
+2026-11-13,Dr. Casey Demo,PGY4,Overnight,CAMH
+2026-11-11,Dr. Morgan Test,PGY4,Overnight,CAMH
+2026-11-20,Dr. Morgan Test,PGY4,Weekend,CAMH
+2026-11-04,Dr. Riley Sample,PGY3,Overnight,CAMH
+2026-11-24,Dr. Riley Sample,PGY3,Overnight,CAMH
+2026-11-09,Dr. Avery Doe,PGY3,Overnight,Mount Sinai
+2026-11-22,Dr. Avery Doe,PGY3,Weekend,Mount Sinai
